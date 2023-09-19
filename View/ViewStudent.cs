@@ -63,16 +63,6 @@ namespace Library_Management.View
             txtEmail.Text = ds.Tables[0].Rows[0][6].ToString();
         }
 
-        private void btnCancle_Click(object sender, EventArgs e)
-        {
-            txtStuName.Clear();
-            txtEnrollNo.Clear();
-            txtDepart.Clear();
-            txtSemester.Clear();
-            txtContact.Clear();
-            txtEmail.Clear();
-        }
-
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
             if (txtSearch.Text != "")
@@ -126,19 +116,47 @@ namespace Library_Management.View
                 {
                     String stuName = txtStuName.Text;
                     String stuEnroll = txtEnrollNo.Text;
-                    String bPublic = txtDepart.Text;
-                    String bPDate = txtSemester.Text;
-                    Int64 bPrice = Int64.Parse(txtContact.Text);
-                    String bQty = txtEmail.Text;
+                    String studepart = txtDepart.Text;
+                    String stuSem = txtSemester.Text;
+                    Int64 stuContact = Int64.Parse(txtContact.Text);
+                    String stuEmail = txtEmail.Text;
 
                     SqlConnection con = new SqlConnection();
                     con.ConnectionString = Main.sourceDB;
                     SqlCommand cmd = new SqlCommand();
                     cmd.Connection = con;
 
-                    cmd.CommandText = "Update NewBook set stuName = '" + stuName + "',stuEnroll = '" + stuEnroll +
-                        "',bPublic = '" + bPublic + "',bPDate = '" + bPDate + "',bPrice = " + bPrice +
-                        ",bQty = " + bQty + "where bid = " + rowid;
+                    cmd.CommandText = "Update NewStudent set stuName = '" + stuName + "',stuEnroll = '" + stuEnroll +
+                        "',studepart = '" + studepart + "',stuSem = '" + stuSem + "',stuContact = " + stuContact +
+                        ",stuEmail = '" + stuEmail + "' where stuid = " + rowid;
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    DataSet ds = new DataSet();
+                    da.Fill(ds);
+
+                    MessageBox.Show("저장 완료", "",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            else
+            {
+                MessageBox.Show("내용을 선택해주세요", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (txtStuName.Text != "" && txtEnrollNo.Text != "" && txtDepart.Text != ""
+                && txtSemester.Text != "" && txtContact.Text != "")
+            {
+                if (MessageBox.Show("내용을 제거하시겠습니까?", "Are you sure?",
+                MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
+                {
+                    SqlConnection con = new SqlConnection();
+                    con.ConnectionString = Main.sourceDB;
+                    SqlCommand cmd = new SqlCommand();
+                    cmd.Connection = con;
+
+                    cmd.CommandText = "Delete from NewStudent where stuid = " + rowid;
                     SqlDataAdapter da = new SqlDataAdapter(cmd);
                     DataSet ds = new DataSet();
                     da.Fill(ds);
@@ -148,6 +166,16 @@ namespace Library_Management.View
             {
                 MessageBox.Show("내용을 선택해주세요", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void btnCancle_Click(object sender, EventArgs e)
+        {
+            txtStuName.Clear();
+            txtEnrollNo.Clear();
+            txtDepart.Clear();
+            txtSemester.Clear();
+            txtContact.Clear();
+            txtEmail.Clear();
         }
     }
 }

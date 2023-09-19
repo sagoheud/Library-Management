@@ -65,16 +65,6 @@ namespace Library_Management.View
             txtQty.Text = ds.Tables[0].Rows[0][6].ToString();
         }
 
-        private void btnCancle_Click(object sender, EventArgs e)
-        {
-            txtBookName.Clear();
-            txtAuthor.Clear();
-            txtPublic.Clear();
-            txtPDate.Value = DateTime.Today;
-            txtPrice.Clear();
-            txtQty.Clear();
-        }
-
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
             if (txtSearch.Text != "")
@@ -140,10 +130,13 @@ namespace Library_Management.View
 
                     cmd.CommandText = "Update NewBook set bName = '" + bName + "',bAuthor = '" + bAuthor +
                         "',bPublic = '" + bPublic + "',bPDate = '" + bPDate + "',bPrice = " + bPrice +
-                        ",bQty = " + bQty + "where bid = " + rowid;
+                        ",bQty = " + bQty + " where bid = " + rowid;
                     SqlDataAdapter da = new SqlDataAdapter(cmd);
                     DataSet ds = new DataSet();
                     da.Fill(ds);
+
+                    MessageBox.Show("저장 완료", "", 
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             else
@@ -175,6 +168,16 @@ namespace Library_Management.View
             {
                 MessageBox.Show("내용을 선택해주세요", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void btnCancle_Click(object sender, EventArgs e)
+        {
+            txtBookName.Clear();
+            txtAuthor.Clear();
+            txtPublic.Clear();
+            txtPDate.Value = DateTime.Today;
+            txtPrice.Clear();
+            txtQty.Clear();
         }
     }
 }
