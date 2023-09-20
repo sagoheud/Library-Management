@@ -29,7 +29,7 @@ namespace Library_Management
 
         private void btnSignup_Click(object sender, EventArgs e)
         {
-            string conString = "Server=교수용PC\\SQLEXPRESS01; Database=LibraryManagement;Trusted_Connection=True;";
+            string conString = Main.sourceDB;
             using (SqlConnection connection = new SqlConnection(conString))
             {
                 connection.Open();

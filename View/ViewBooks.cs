@@ -74,7 +74,7 @@ namespace Library_Management.View
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = con;
 
-                cmd.CommandText = "Select * from NewBook where bName LIKE '"+txtSearch.Text+ "%'";
+                cmd.CommandText = "Select * from NewBook where bName LIKE '" + txtSearch.Text + "%'";
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 DataSet ds = new DataSet();
                 da.Fill(ds);
@@ -129,7 +129,7 @@ namespace Library_Management.View
                     cmd.Connection = con;
 
                     cmd.CommandText = "Update NewBook set bName = '" + bName + "',bAuthor = '" + bAuthor +
-                        "',bPublic = '" + bPublic + "',bPDate = '" + bPDate + "',bPrice = " + bPrice +
+                        "',bPublic = '" +bPublic + "',bPDate = '" + bPDate + "',bPrice = " + bPrice +
                         ",bQty = " + bQty + " where bid = " + rowid;
                     SqlDataAdapter da = new SqlDataAdapter(cmd);
                     DataSet ds = new DataSet();
@@ -137,6 +137,7 @@ namespace Library_Management.View
 
                     MessageBox.Show("저장 완료", "", 
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    ViewBooks_Load(sender,e);
                 }
             }
             else
@@ -162,6 +163,10 @@ namespace Library_Management.View
                     SqlDataAdapter da = new SqlDataAdapter(cmd);
                     DataSet ds = new DataSet();
                     da.Fill(ds);
+
+                    MessageBox.Show("삭제 완료", "",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    ViewBooks_Load(sender, e);
                 }
             }
             else

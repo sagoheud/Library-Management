@@ -51,5 +51,23 @@ namespace Library_Management
             ViewStudent vst = new ViewStudent();
             vst.Show();
         }
+
+        private void btnBookIssue_Click(object sender, EventArgs e)
+        {
+            IssueBooks ib = new IssueBooks();
+            ib.Show();
+        }
+
+        private void btnBookReturn_Click(object sender, EventArgs e)
+        {
+            ReturnBooks rb = new ReturnBooks();
+            rb.Show();
+        }
+
+        private void btnBookDetail_Click(object sender, EventArgs e)
+        {
+            CompleteBooksDetails cbd = new CompleteBooksDetails();
+            cbd.Show();
+        }
     }
 }

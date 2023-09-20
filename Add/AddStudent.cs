@@ -47,7 +47,8 @@ namespace Library_Management.Add
 
                 con.Open();
                 cmd.CommandText = "Insert into NewStudent (stuName,stuEnroll,studepart,stuSem,stuContact,stuEmail) values ('"
-                    + stuName + "','" + stuEnroll + "','" + studepart + "','" + stuSem + "'," + stuContact + ",'" + stuEmail +"')";
+                    + stuName + "','" + stuEnroll + "','" + studepart + "','" + stuSem + "'," + stuContact + 
+                    ",'" + stuEmail +"')";
                 cmd.ExecuteNonQuery();
                 con.Close();
 

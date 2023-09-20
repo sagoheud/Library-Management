@@ -126,15 +126,17 @@ namespace Library_Management.View
                     SqlCommand cmd = new SqlCommand();
                     cmd.Connection = con;
 
-                    cmd.CommandText = "Update NewStudent set stuName = '" + stuName + "',stuEnroll = '" + stuEnroll +
-                        "',studepart = '" + studepart + "',stuSem = '" + stuSem + "',stuContact = " + stuContact +
-                        ",stuEmail = '" + stuEmail + "' where stuid = " + rowid;
+                    cmd.CommandText = "Update NewStudent set stuName = '" + stuName + "'," +
+                        "stuEnroll = '" + stuEnroll + "',studepart = '" + studepart + "',stuSem = '"
+                        + stuSem + "',stuContact = " + stuContact + ",stuEmail = '" + stuEmail + 
+                        "' where stuid = " + rowid;
                     SqlDataAdapter da = new SqlDataAdapter(cmd);
                     DataSet ds = new DataSet();
                     da.Fill(ds);
 
                     MessageBox.Show("저장 완료", "",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    ViewStudent_Load(sender, e);
                 }
             }
             else
@@ -160,6 +162,10 @@ namespace Library_Management.View
                     SqlDataAdapter da = new SqlDataAdapter(cmd);
                     DataSet ds = new DataSet();
                     da.Fill(ds);
+
+                    MessageBox.Show("삭제 완료", "",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    ViewStudent_Load(sender, e);
                 }
             }
             else

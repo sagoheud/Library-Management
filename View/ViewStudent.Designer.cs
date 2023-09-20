@@ -182,7 +182,7 @@
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(82, 21);
             this.label13.TabIndex = 22;
-            this.label13.Text = "등록번호 :";
+            this.label13.Text = "회원번호 :";
             // 
             // label14
             // 

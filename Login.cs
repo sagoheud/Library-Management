@@ -62,7 +62,7 @@ namespace Library_Management
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = con;
 
-            cmd.CommandText = "select * from Login where username = '"+txtUsername.Text+ "' and pass = '"+txtPassword.Text+"' ";
+            cmd.CommandText = "select * from Login where username = '" + txtUsername.Text+ "' and pass = '"+txtPassword.Text+"' ";
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataSet ds = new DataSet();
             da.Fill(ds);

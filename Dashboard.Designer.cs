@@ -70,7 +70,7 @@
             this.btnBook.Image = global::Library_Management.Properties.Resources.free_icon_book_3403915;
             this.btnBook.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnBook.Name = "btnBook";
-            this.btnBook.Size = new System.Drawing.Size(122, 70);
+            this.btnBook.Size = new System.Drawing.Size(172, 70);
             this.btnBook.Text = "도서 관리";
             this.btnBook.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
@@ -138,8 +138,9 @@
             this.btnBookIssue.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnBookIssue.Name = "btnBookIssue";
             this.btnBookIssue.Size = new System.Drawing.Size(172, 70);
-            this.btnBookIssue.Text = "출간 도서";
+            this.btnBookIssue.Text = "도서 대여";
             this.btnBookIssue.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnBookIssue.Click += new System.EventHandler(this.btnBookIssue_Click);
             // 
             // btnBookReturn
             // 
@@ -150,8 +151,9 @@
             this.btnBookReturn.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnBookReturn.Name = "btnBookReturn";
             this.btnBookReturn.Size = new System.Drawing.Size(172, 70);
-            this.btnBookReturn.Text = "도서 대여반납";
+            this.btnBookReturn.Text = "도서 반납";
             this.btnBookReturn.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnBookReturn.Click += new System.EventHandler(this.btnBookReturn_Click);
             // 
             // btnBookDetail
             // 
@@ -163,6 +165,7 @@
             this.btnBookDetail.Size = new System.Drawing.Size(172, 70);
             this.btnBookDetail.Text = "도서 상세 설명";
             this.btnBookDetail.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnBookDetail.Click += new System.EventHandler(this.btnBookDetail_Click);
             // 
             // btnExit
             // 
