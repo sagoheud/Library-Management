@@ -64,7 +64,7 @@
             this.btnExit.Location = new System.Drawing.Point(299, 323);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(97, 33);
-            this.btnExit.TabIndex = 3;
+            this.btnExit.TabIndex = 8;
             this.btnExit.Text = "닫기";
             this.btnExit.UseVisualStyleBackColor = false;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
@@ -79,7 +79,7 @@
             this.btnRefresh.Location = new System.Drawing.Point(83, 323);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(97, 33);
-            this.btnRefresh.TabIndex = 3;
+            this.btnRefresh.TabIndex = 6;
             this.btnRefresh.Text = "초기화";
             this.btnRefresh.UseVisualStyleBackColor = false;
             this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
@@ -91,7 +91,7 @@
             this.txtEmail.Location = new System.Drawing.Point(149, 266);
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(244, 29);
-            this.txtEmail.TabIndex = 1;
+            this.txtEmail.TabIndex = 5;
             // 
             // txtContact
             // 
@@ -100,7 +100,7 @@
             this.txtContact.Location = new System.Drawing.Point(149, 220);
             this.txtContact.Name = "txtContact";
             this.txtContact.Size = new System.Drawing.Size(244, 29);
-            this.txtContact.TabIndex = 1;
+            this.txtContact.TabIndex = 4;
             this.txtContact.TextChanged += new System.EventHandler(this.txtContact_TextChanged);
             // 
             // txtDepart
@@ -109,7 +109,7 @@
             this.txtDepart.Location = new System.Drawing.Point(149, 128);
             this.txtDepart.Name = "txtDepart";
             this.txtDepart.Size = new System.Drawing.Size(244, 29);
-            this.txtDepart.TabIndex = 1;
+            this.txtDepart.TabIndex = 2;
             // 
             // txtEnrollNo
             // 
@@ -125,7 +125,7 @@
             this.txtStuName.Location = new System.Drawing.Point(149, 36);
             this.txtStuName.Name = "txtStuName";
             this.txtStuName.Size = new System.Drawing.Size(244, 29);
-            this.txtStuName.TabIndex = 1;
+            this.txtStuName.TabIndex = 0;
             // 
             // label7
             // 
@@ -239,7 +239,7 @@
             this.panel2.Location = new System.Drawing.Point(259, 75);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(441, 394);
-            this.panel2.TabIndex = 5;
+            this.panel2.TabIndex = 0;
             // 
             // btnSave
             // 
@@ -251,7 +251,7 @@
             this.btnSave.Location = new System.Drawing.Point(191, 323);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(97, 33);
-            this.btnSave.TabIndex = 3;
+            this.btnSave.TabIndex = 7;
             this.btnSave.Text = "저장";
             this.btnSave.UseVisualStyleBackColor = false;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
@@ -262,7 +262,7 @@
             this.txtSemester.Location = new System.Drawing.Point(149, 174);
             this.txtSemester.Name = "txtSemester";
             this.txtSemester.Size = new System.Drawing.Size(244, 29);
-            this.txtSemester.TabIndex = 1;
+            this.txtSemester.TabIndex = 3;
             // 
             // pictureBox1
             // 

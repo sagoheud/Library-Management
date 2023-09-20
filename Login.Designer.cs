@@ -64,7 +64,7 @@
             this.txtUsername.Location = new System.Drawing.Point(94, 200);
             this.txtUsername.Name = "txtUsername";
             this.txtUsername.Size = new System.Drawing.Size(170, 22);
-            this.txtUsername.TabIndex = 2;
+            this.txtUsername.TabIndex = 0;
             this.txtUsername.Text = "사용자명";
             this.txtUsername.MouseClick += new System.Windows.Forms.MouseEventHandler(this.txtUsername_MouseClick);
             // 
@@ -77,7 +77,7 @@
             this.txtPassword.Location = new System.Drawing.Point(94, 258);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.Size = new System.Drawing.Size(170, 22);
-            this.txtPassword.TabIndex = 2;
+            this.txtPassword.TabIndex = 1;
             this.txtPassword.Text = "비밀번호";
             this.txtPassword.MouseClick += new System.Windows.Forms.MouseEventHandler(this.txtPassword_MouseClick);
             // 
@@ -116,7 +116,7 @@
             this.btnLogin.Location = new System.Drawing.Point(73, 317);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(209, 36);
-            this.btnLogin.TabIndex = 9;
+            this.btnLogin.TabIndex = 2;
             this.btnLogin.Text = "로그인";
             this.btnLogin.UseVisualStyleBackColor = false;
             this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
@@ -129,7 +129,7 @@
             this.btnSignup.Location = new System.Drawing.Point(73, 362);
             this.btnSignup.Name = "btnSignup";
             this.btnSignup.Size = new System.Drawing.Size(209, 36);
-            this.btnSignup.TabIndex = 9;
+            this.btnSignup.TabIndex = 3;
             this.btnSignup.Text = "회원가입";
             this.btnSignup.UseVisualStyleBackColor = false;
             this.btnSignup.Click += new System.EventHandler(this.btnSignup_Click);
@@ -223,7 +223,7 @@
             this.btnClose.Location = new System.Drawing.Point(298, 0);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(27, 26);
-            this.btnClose.TabIndex = 12;
+            this.btnClose.TabIndex = 0;
             this.btnClose.Text = "X";
             this.btnClose.UseVisualStyleBackColor = false;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
@@ -239,7 +239,7 @@
             this.panel3.Location = new System.Drawing.Point(12, 12);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(325, 476);
-            this.panel3.TabIndex = 13;
+            this.panel3.TabIndex = 4;
             // 
             // Login
             // 

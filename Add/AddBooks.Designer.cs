@@ -114,7 +114,7 @@
             this.panel2.Location = new System.Drawing.Point(256, 77);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(428, 351);
-            this.panel2.TabIndex = 2;
+            this.panel2.TabIndex = 0;
             // 
             // btnCancle
             // 
@@ -126,7 +126,7 @@
             this.btnCancle.Location = new System.Drawing.Point(240, 298);
             this.btnCancle.Name = "btnCancle";
             this.btnCancle.Size = new System.Drawing.Size(97, 41);
-            this.btnCancle.TabIndex = 3;
+            this.btnCancle.TabIndex = 7;
             this.btnCancle.Text = "취소";
             this.btnCancle.UseVisualStyleBackColor = false;
             this.btnCancle.Click += new System.EventHandler(this.btnCancle_Click);
@@ -141,7 +141,7 @@
             this.btnSave.Location = new System.Drawing.Point(92, 298);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(97, 41);
-            this.btnSave.TabIndex = 3;
+            this.btnSave.TabIndex = 6;
             this.btnSave.Text = "저장";
             this.btnSave.UseVisualStyleBackColor = false;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
@@ -152,7 +152,7 @@
             this.dateTimePicker1.Location = new System.Drawing.Point(134, 162);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(244, 29);
-            this.dateTimePicker1.TabIndex = 2;
+            this.dateTimePicker1.TabIndex = 3;
             // 
             // txtQty
             // 
@@ -161,7 +161,7 @@
             this.txtQty.Location = new System.Drawing.Point(134, 250);
             this.txtQty.Name = "txtQty";
             this.txtQty.Size = new System.Drawing.Size(244, 29);
-            this.txtQty.TabIndex = 1;
+            this.txtQty.TabIndex = 5;
             this.txtQty.TextChanged += new System.EventHandler(this.txtQty_TextChanged);
             // 
             // txtPrice
@@ -171,7 +171,7 @@
             this.txtPrice.Location = new System.Drawing.Point(134, 206);
             this.txtPrice.Name = "txtPrice";
             this.txtPrice.Size = new System.Drawing.Size(244, 29);
-            this.txtPrice.TabIndex = 1;
+            this.txtPrice.TabIndex = 4;
             this.txtPrice.TextChanged += new System.EventHandler(this.txtPrice_TextChanged);
             // 
             // txtPublic
@@ -180,7 +180,7 @@
             this.txtPublic.Location = new System.Drawing.Point(134, 118);
             this.txtPublic.Name = "txtPublic";
             this.txtPublic.Size = new System.Drawing.Size(244, 29);
-            this.txtPublic.TabIndex = 1;
+            this.txtPublic.TabIndex = 2;
             // 
             // txtAuthor
             // 
@@ -196,7 +196,7 @@
             this.txtBookName.Location = new System.Drawing.Point(134, 30);
             this.txtBookName.Name = "txtBookName";
             this.txtBookName.Size = new System.Drawing.Size(244, 29);
-            this.txtBookName.TabIndex = 1;
+            this.txtBookName.TabIndex = 0;
             // 
             // label7
             // 

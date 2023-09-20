@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -115,7 +115,7 @@
             this.panel2.Location = new System.Drawing.Point(12, 430);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(910, 259);
-            this.panel2.TabIndex = 5;
+            this.panel2.TabIndex = 3;
             // 
             // btnCancle
             // 
@@ -127,7 +127,7 @@
             this.btnCancle.Location = new System.Drawing.Point(743, 208);
             this.btnCancle.Name = "btnCancle";
             this.btnCancle.Size = new System.Drawing.Size(94, 30);
-            this.btnCancle.TabIndex = 17;
+            this.btnCancle.TabIndex = 8;
             this.btnCancle.Text = "취소";
             this.btnCancle.UseVisualStyleBackColor = false;
             this.btnCancle.Click += new System.EventHandler(this.btnCancle_Click);
@@ -142,7 +142,7 @@
             this.btnDelete.Location = new System.Drawing.Point(628, 208);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(94, 30);
-            this.btnDelete.TabIndex = 17;
+            this.btnDelete.TabIndex = 7;
             this.btnDelete.Text = "삭제";
             this.btnDelete.UseVisualStyleBackColor = false;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
@@ -157,7 +157,7 @@
             this.btnUpdate.Location = new System.Drawing.Point(514, 208);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(94, 30);
-            this.btnUpdate.TabIndex = 17;
+            this.btnUpdate.TabIndex = 6;
             this.btnUpdate.Text = "업데이트";
             this.btnUpdate.UseVisualStyleBackColor = false;
             this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
@@ -168,7 +168,7 @@
             this.txtPDate.Location = new System.Drawing.Point(593, 32);
             this.txtPDate.Name = "txtPDate";
             this.txtPDate.Size = new System.Drawing.Size(244, 29);
-            this.txtPDate.TabIndex = 15;
+            this.txtPDate.TabIndex = 3;
             // 
             // txtQty
             // 
@@ -177,7 +177,7 @@
             this.txtQty.Location = new System.Drawing.Point(593, 153);
             this.txtQty.Name = "txtQty";
             this.txtQty.Size = new System.Drawing.Size(244, 29);
-            this.txtQty.TabIndex = 10;
+            this.txtQty.TabIndex = 5;
             // 
             // txtPrice
             // 
@@ -186,7 +186,7 @@
             this.txtPrice.Location = new System.Drawing.Point(593, 93);
             this.txtPrice.Name = "txtPrice";
             this.txtPrice.Size = new System.Drawing.Size(244, 29);
-            this.txtPrice.TabIndex = 11;
+            this.txtPrice.TabIndex = 4;
             // 
             // txtPublic
             // 
@@ -194,7 +194,7 @@
             this.txtPublic.Location = new System.Drawing.Point(156, 153);
             this.txtPublic.Name = "txtPublic";
             this.txtPublic.Size = new System.Drawing.Size(244, 29);
-            this.txtPublic.TabIndex = 12;
+            this.txtPublic.TabIndex = 2;
             // 
             // txtAuthor
             // 
@@ -202,7 +202,7 @@
             this.txtAuthor.Location = new System.Drawing.Point(156, 93);
             this.txtAuthor.Name = "txtAuthor";
             this.txtAuthor.Size = new System.Drawing.Size(244, 29);
-            this.txtAuthor.TabIndex = 13;
+            this.txtAuthor.TabIndex = 1;
             // 
             // txtBookName
             // 
@@ -210,7 +210,7 @@
             this.txtBookName.Location = new System.Drawing.Point(156, 32);
             this.txtBookName.Name = "txtBookName";
             this.txtBookName.Size = new System.Drawing.Size(244, 29);
-            this.txtBookName.TabIndex = 14;
+            this.txtBookName.TabIndex = 0;
             // 
             // label7
             // 
@@ -288,7 +288,7 @@
             this.txtSearch.Location = new System.Drawing.Point(346, 146);
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(233, 25);
-            this.txtSearch.TabIndex = 2;
+            this.txtSearch.TabIndex = 0;
             this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
             // 
             // btnRefresh
@@ -298,7 +298,7 @@
             this.btnRefresh.Location = new System.Drawing.Point(592, 144);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(64, 29);
-            this.btnRefresh.TabIndex = 3;
+            this.btnRefresh.TabIndex = 1;
             this.btnRefresh.Text = "재정렬";
             this.btnRefresh.UseVisualStyleBackColor = true;
             this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
@@ -314,21 +314,21 @@
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.ColumnHeadersVisible = false;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.Location = new System.Drawing.Point(12, 181);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.Size = new System.Drawing.Size(910, 229);
-            this.dataGridView1.TabIndex = 4;
+            this.dataGridView1.TabIndex = 2;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             // 
             // ViewBooks

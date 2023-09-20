@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -103,7 +103,7 @@
             this.panel2.Location = new System.Drawing.Point(12, 129);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(247, 372);
-            this.panel2.TabIndex = 3;
+            this.panel2.TabIndex = 0;
             // 
             // btnSearch
             // 
@@ -115,7 +115,7 @@
             this.btnSearch.Location = new System.Drawing.Point(42, 226);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(161, 48);
-            this.btnSearch.TabIndex = 4;
+            this.btnSearch.TabIndex = 1;
             this.btnSearch.Text = "학생 정보 검색";
             this.btnSearch.UseVisualStyleBackColor = false;
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
@@ -130,7 +130,7 @@
             this.btnExit.Location = new System.Drawing.Point(138, 301);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(78, 33);
-            this.btnExit.TabIndex = 4;
+            this.btnExit.TabIndex = 3;
             this.btnExit.Text = "닫기";
             this.btnExit.UseVisualStyleBackColor = false;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
@@ -145,7 +145,7 @@
             this.btnRefresh.Location = new System.Drawing.Point(30, 301);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(78, 33);
-            this.btnRefresh.TabIndex = 4;
+            this.btnRefresh.TabIndex = 2;
             this.btnRefresh.Text = "초기화";
             this.btnRefresh.UseVisualStyleBackColor = false;
             this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
@@ -156,7 +156,7 @@
             this.txtSearch.Location = new System.Drawing.Point(17, 180);
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(213, 29);
-            this.txtSearch.TabIndex = 2;
+            this.txtSearch.TabIndex = 0;
             this.txtSearch.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label6
@@ -166,7 +166,7 @@
             this.label6.Location = new System.Drawing.Point(23, 144);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(207, 25);
-            this.label6.TabIndex = 1;
+            this.label6.TabIndex = 4;
             this.label6.Text = "회원번호를 입력하세요";
             // 
             // pictureBox2
@@ -190,21 +190,21 @@
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.ColumnHeadersVisible = false;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.Location = new System.Drawing.Point(265, 129);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.Size = new System.Drawing.Size(731, 245);
-            this.dataGridView1.TabIndex = 5;
+            this.dataGridView1.TabIndex = 1;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             // 
             // txtReturnDate
@@ -216,7 +216,7 @@
             this.txtReturnDate.Location = new System.Drawing.Point(221, 84);
             this.txtReturnDate.Name = "txtReturnDate";
             this.txtReturnDate.Size = new System.Drawing.Size(289, 27);
-            this.txtReturnDate.TabIndex = 18;
+            this.txtReturnDate.TabIndex = 2;
             // 
             // txtBookName
             // 
@@ -228,7 +228,7 @@
             this.txtBookName.Name = "txtBookName";
             this.txtBookName.ReadOnly = true;
             this.txtBookName.Size = new System.Drawing.Size(289, 27);
-            this.txtBookName.TabIndex = 16;
+            this.txtBookName.TabIndex = 0;
             // 
             // label9
             // 
@@ -270,7 +270,7 @@
             this.txtIssueDate.Name = "txtIssueDate";
             this.txtIssueDate.ReadOnly = true;
             this.txtIssueDate.Size = new System.Drawing.Size(289, 27);
-            this.txtIssueDate.TabIndex = 16;
+            this.txtIssueDate.TabIndex = 1;
             // 
             // panel3
             // 
@@ -289,7 +289,7 @@
             this.panel3.Location = new System.Drawing.Point(265, 380);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(731, 121);
-            this.panel3.TabIndex = 6;
+            this.panel3.TabIndex = 2;
             // 
             // btnCancel
             // 
@@ -318,7 +318,7 @@
             this.btnReturn.Location = new System.Drawing.Point(549, 23);
             this.btnReturn.Name = "btnReturn";
             this.btnReturn.Size = new System.Drawing.Size(98, 32);
-            this.btnReturn.TabIndex = 4;
+            this.btnReturn.TabIndex = 3;
             this.btnReturn.Text = "반납";
             this.btnReturn.UseVisualStyleBackColor = false;
             this.btnReturn.Click += new System.EventHandler(this.btnReturn_Click);

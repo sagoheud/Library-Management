@@ -50,7 +50,7 @@
             this.btnExit.Location = new System.Drawing.Point(57, 384);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(209, 36);
-            this.btnExit.TabIndex = 10;
+            this.btnExit.TabIndex = 4;
             this.btnExit.Text = "취소";
             this.btnExit.UseVisualStyleBackColor = false;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
@@ -63,7 +63,7 @@
             this.btnSignup.Location = new System.Drawing.Point(57, 326);
             this.btnSignup.Name = "btnSignup";
             this.btnSignup.Size = new System.Drawing.Size(209, 36);
-            this.btnSignup.TabIndex = 11;
+            this.btnSignup.TabIndex = 3;
             this.btnSignup.Text = "회원가입";
             this.btnSignup.UseVisualStyleBackColor = false;
             this.btnSignup.Click += new System.EventHandler(this.btnSignup_Click);
@@ -148,7 +148,7 @@
             this.txtAccess.Location = new System.Drawing.Point(59, 251);
             this.txtAccess.Name = "txtAccess";
             this.txtAccess.Size = new System.Drawing.Size(207, 22);
-            this.txtAccess.TabIndex = 12;
+            this.txtAccess.TabIndex = 2;
             // 
             // txtPassword
             // 
@@ -159,7 +159,7 @@
             this.txtPassword.Location = new System.Drawing.Point(57, 189);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.Size = new System.Drawing.Size(209, 22);
-            this.txtPassword.TabIndex = 12;
+            this.txtPassword.TabIndex = 1;
             // 
             // txtUsername
             // 
@@ -170,9 +170,9 @@
             this.txtUsername.Location = new System.Drawing.Point(57, 126);
             this.txtUsername.Name = "txtUsername";
             this.txtUsername.Size = new System.Drawing.Size(209, 22);
-            this.txtUsername.TabIndex = 13;
+            this.txtUsername.TabIndex = 0;
             // 
-            // frmSignup
+            // Signup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -191,7 +191,7 @@
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.btnSignup);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "frmSignup";
+            this.Name = "Signup";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmSignup";
             this.ResumeLayout(false);

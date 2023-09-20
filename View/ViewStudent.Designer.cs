@@ -82,7 +82,7 @@
             this.panel2.Location = new System.Drawing.Point(12, 431);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(910, 259);
-            this.panel2.TabIndex = 11;
+            this.panel2.TabIndex = 3;
             // 
             // txtEmail
             // 
@@ -91,7 +91,7 @@
             this.txtEmail.Location = new System.Drawing.Point(593, 152);
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(244, 29);
-            this.txtEmail.TabIndex = 24;
+            this.txtEmail.TabIndex = 5;
             // 
             // txtContact
             // 
@@ -100,7 +100,7 @@
             this.txtContact.Location = new System.Drawing.Point(593, 93);
             this.txtContact.Name = "txtContact";
             this.txtContact.Size = new System.Drawing.Size(244, 29);
-            this.txtContact.TabIndex = 25;
+            this.txtContact.TabIndex = 4;
             // 
             // txtSemester
             // 
@@ -108,7 +108,7 @@
             this.txtSemester.Location = new System.Drawing.Point(593, 32);
             this.txtSemester.Name = "txtSemester";
             this.txtSemester.Size = new System.Drawing.Size(244, 29);
-            this.txtSemester.TabIndex = 26;
+            this.txtSemester.TabIndex = 3;
             // 
             // txtDepart
             // 
@@ -116,7 +116,7 @@
             this.txtDepart.Location = new System.Drawing.Point(156, 152);
             this.txtDepart.Name = "txtDepart";
             this.txtDepart.Size = new System.Drawing.Size(244, 29);
-            this.txtDepart.TabIndex = 27;
+            this.txtDepart.TabIndex = 2;
             // 
             // txtEnrollNo
             // 
@@ -124,7 +124,7 @@
             this.txtEnrollNo.Location = new System.Drawing.Point(156, 93);
             this.txtEnrollNo.Name = "txtEnrollNo";
             this.txtEnrollNo.Size = new System.Drawing.Size(244, 29);
-            this.txtEnrollNo.TabIndex = 28;
+            this.txtEnrollNo.TabIndex = 1;
             // 
             // txtStuName
             // 
@@ -132,7 +132,7 @@
             this.txtStuName.Location = new System.Drawing.Point(156, 32);
             this.txtStuName.Name = "txtStuName";
             this.txtStuName.Size = new System.Drawing.Size(244, 29);
-            this.txtStuName.TabIndex = 29;
+            this.txtStuName.TabIndex = 0;
             // 
             // label9
             // 
@@ -204,7 +204,7 @@
             this.btnCancle.Location = new System.Drawing.Point(743, 208);
             this.btnCancle.Name = "btnCancle";
             this.btnCancle.Size = new System.Drawing.Size(94, 30);
-            this.btnCancle.TabIndex = 17;
+            this.btnCancle.TabIndex = 8;
             this.btnCancle.Text = "취소";
             this.btnCancle.UseVisualStyleBackColor = false;
             this.btnCancle.Click += new System.EventHandler(this.btnCancle_Click);
@@ -219,7 +219,7 @@
             this.btnDelete.Location = new System.Drawing.Point(628, 208);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(94, 30);
-            this.btnDelete.TabIndex = 17;
+            this.btnDelete.TabIndex = 7;
             this.btnDelete.Text = "삭제";
             this.btnDelete.UseVisualStyleBackColor = false;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
@@ -234,7 +234,7 @@
             this.btnUpdate.Location = new System.Drawing.Point(514, 208);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(94, 30);
-            this.btnUpdate.TabIndex = 17;
+            this.btnUpdate.TabIndex = 6;
             this.btnUpdate.Text = "업데이트";
             this.btnUpdate.UseVisualStyleBackColor = false;
             this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
@@ -264,7 +264,7 @@
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.Size = new System.Drawing.Size(910, 229);
-            this.dataGridView1.TabIndex = 10;
+            this.dataGridView1.TabIndex = 2;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             // 
             // btnRefresh
@@ -274,7 +274,7 @@
             this.btnRefresh.Location = new System.Drawing.Point(605, 145);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(64, 29);
-            this.btnRefresh.TabIndex = 9;
+            this.btnRefresh.TabIndex = 1;
             this.btnRefresh.Text = "재정렬";
             this.btnRefresh.UseVisualStyleBackColor = true;
             this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
@@ -285,7 +285,7 @@
             this.txtSearch.Location = new System.Drawing.Point(359, 147);
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(233, 25);
-            this.txtSearch.TabIndex = 8;
+            this.txtSearch.TabIndex = 0;
             this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
             // 
             // label2
