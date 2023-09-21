@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -19,19 +20,25 @@ namespace Library_Management.View
             InitializeComponent();
         }
 
+        private MySqlConnection GetConnection()
+        {
+            string connectionString = Main.sourceDB;
+            return new MySqlConnection(connectionString);
+        }
+
         private void ViewStudent_Load(object sender, EventArgs e)
         {
-            SqlConnection con = new SqlConnection();
-            con.ConnectionString = Main.sourceDB;
-            SqlCommand cmd = new SqlCommand();
-            cmd.Connection = con;
-
-            cmd.CommandText = "Select * from NewStudent";
-            SqlDataAdapter da = new SqlDataAdapter(cmd);
-            DataSet ds = new DataSet();
-            da.Fill(ds);
-
-            dataGridView1.DataSource = ds.Tables[0];
+            using (MySqlConnection con = GetConnection())
+            {
+                con.Open();
+                string query = "SELECT * FROM NewStudent";
+                using (MySqlDataAdapter da = new MySqlDataAdapter(query, con))
+                {
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+                    dataGridView1.DataSource = dt;
+                }
+            }
         }
 
         int stuid;
@@ -44,54 +51,58 @@ namespace Library_Management.View
                 stuid = int.Parse(dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString());
             }
 
-            SqlConnection con = new SqlConnection();
-            con.ConnectionString = Main.sourceDB;
-            SqlCommand cmd = new SqlCommand();
-            cmd.Connection = con;
+            using (MySqlConnection con = GetConnection())
+            {
+                con.Open();
+                string query = "SELECT * FROM NewStudent WHERE stuid= " + stuid;
+                using (MySqlDataAdapter da = new MySqlDataAdapter(query, con))
+                {
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
 
-            cmd.CommandText = "Select * from NewStudent where stuid= " + stuid + "";
-            SqlDataAdapter da = new SqlDataAdapter(cmd);
-            DataSet ds = new DataSet();
-            da.Fill(ds);
-
-            rowid = Int64.Parse(ds.Tables[0].Rows[0][0].ToString());
-            txtStuName.Text = ds.Tables[0].Rows[0][1].ToString();
-            txtEnrollNo.Text = ds.Tables[0].Rows[0][2].ToString();
-            txtDepart.Text = ds.Tables[0].Rows[0][3].ToString();
-            txtSemester.Text = ds.Tables[0].Rows[0][4].ToString();
-            txtContact.Text = ds.Tables[0].Rows[0][5].ToString();
-            txtEmail.Text = ds.Tables[0].Rows[0][6].ToString();
+                    if (dt.Rows.Count > 0)
+                    {
+                        rowid = Int64.Parse(dt.Rows[0][0].ToString());
+                        txtStuName.Text = dt.Rows[0][1].ToString();
+                        txtEnrollNo.Text = dt.Rows[0][2].ToString();
+                        txtDepart.Text = dt.Rows[0][3].ToString();
+                        txtSemester.Text = dt.Rows[0][4].ToString();
+                        txtContact.Text = dt.Rows[0][5].ToString();
+                        txtEmail.Text = dt.Rows[0][6].ToString();
+                    }
+                }
+            }
         }
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
             if (txtSearch.Text != "")
             {
-                SqlConnection con = new SqlConnection();
-                con.ConnectionString = Main.sourceDB;
-                SqlCommand cmd = new SqlCommand();
-                cmd.Connection = con;
-
-                cmd.CommandText = "Select * from NewStudent where stuName LIKE '" + txtSearch.Text + "%'";
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
-                DataSet ds = new DataSet();
-                da.Fill(ds);
-
-                dataGridView1.DataSource = ds.Tables[0];
+                using (MySqlConnection con = GetConnection())
+                {
+                    con.Open();
+                    string query = "SELECT * FROM NewStudent WHERE stuName LIKE '" + txtSearch.Text + "%'";
+                    using (MySqlDataAdapter da = new MySqlDataAdapter(query, con))
+                    {
+                        DataTable dt = new DataTable();
+                        da.Fill(dt);
+                        dataGridView1.DataSource = dt;
+                    }
+                }
             }
             else
             {
-                SqlConnection con = new SqlConnection();
-                con.ConnectionString = Main.sourceDB;
-                SqlCommand cmd = new SqlCommand();
-                cmd.Connection = con;
-
-                cmd.CommandText = "Select * from NewStudent";
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
-                DataSet ds = new DataSet();
-                da.Fill(ds);
-
-                dataGridView1.DataSource = ds.Tables[0];
+                using (MySqlConnection con = GetConnection())
+                {
+                    con.Open();
+                    string query = "SELECT * FROM NewStudent";
+                    using (MySqlDataAdapter da = new MySqlDataAdapter(query, con))
+                    {
+                        DataTable dt = new DataTable();
+                        da.Fill(dt);
+                        dataGridView1.DataSource = dt;
+                    }
+                }
             }
         }
 
@@ -114,58 +125,32 @@ namespace Library_Management.View
                 if (MessageBox.Show("내용을 변경하시겠습니까?", "Question",
                 MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
                 {
-                    String stuName = txtStuName.Text;
-                    String stuEnroll = txtEnrollNo.Text;
-                    String studepart = txtDepart.Text;
-                    String stuSem = txtSemester.Text;
+                    string stuName = txtStuName.Text;
+                    string stuEnroll = txtEnrollNo.Text;
+                    string stuDepart = txtDepart.Text;
+                    string stuSemester = txtSemester.Text;
                     Int64 stuContact = Int64.Parse(txtContact.Text);
-                    String stuEmail = txtEmail.Text;
+                    string stuEmail = txtEmail.Text;
 
-                    SqlConnection con = new SqlConnection();
-                    con.ConnectionString = Main.sourceDB;
-                    SqlCommand cmd = new SqlCommand();
-                    cmd.Connection = con;
+                    using (MySqlConnection con = GetConnection())
+                    {
+                        con.Open();
+                        string query = "UPDATE NewStudent SET stuName = @stuName, stuEnroll = @stuEnroll, " +
+                            "studepart = @studepart, stuSem = @stuSem, stuContact = @stuContact, stuEmail = @stuEmail " +
+                            "WHERE stuid = @stuid";
+                        using (MySqlCommand cmd = new MySqlCommand(query, con))
+                        {
+                            cmd.Parameters.AddWithValue("@stuName", stuName);
+                            cmd.Parameters.AddWithValue("@stuEnroll", stuEnroll);
+                            cmd.Parameters.AddWithValue("@studepart", stuDepart);
+                            cmd.Parameters.AddWithValue("@stuSem", stuSemester);
+                            cmd.Parameters.AddWithValue("@stuContact", stuContact);
+                            cmd.Parameters.AddWithValue("@stuEmail", stuEmail);
+                            cmd.Parameters.AddWithValue("@stuid", stuid);
 
-                    cmd.CommandText = "Update NewStudent set stuName = '" + stuName + "'," +
-                        "stuEnroll = '" + stuEnroll + "',studepart = '" + studepart + "',stuSem = '"
-                        + stuSem + "',stuContact = " + stuContact + ",stuEmail = '" + stuEmail + 
-                        "' where stuid = " + rowid;
-                    SqlDataAdapter da = new SqlDataAdapter(cmd);
-                    DataSet ds = new DataSet();
-                    da.Fill(ds);
-
-                    MessageBox.Show("저장 완료", "",
-                        MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    ViewStudent_Load(sender, e);
-                }
-            }
-            else
-            {
-                MessageBox.Show("내용을 선택해주세요", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void btnDelete_Click(object sender, EventArgs e)
-        {
-            if (txtStuName.Text != "" && txtEnrollNo.Text != "" && txtDepart.Text != ""
-                && txtSemester.Text != "" && txtContact.Text != "")
-            {
-                if (MessageBox.Show("내용을 제거하시겠습니까?", "Are you sure?",
-                MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
-                {
-                    SqlConnection con = new SqlConnection();
-                    con.ConnectionString = Main.sourceDB;
-                    SqlCommand cmd = new SqlCommand();
-                    cmd.Connection = con;
-
-                    cmd.CommandText = "Delete from NewStudent where stuid = " + rowid;
-                    SqlDataAdapter da = new SqlDataAdapter(cmd);
-                    DataSet ds = new DataSet();
-                    da.Fill(ds);
-
-                    MessageBox.Show("삭제 완료", "",
-                        MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    ViewStudent_Load(sender, e);
+                            cmd.ExecuteNonQuery();
+                        }
+                    }
                 }
             }
             else
@@ -182,6 +167,47 @@ namespace Library_Management.View
             txtSemester.Clear();
             txtContact.Clear();
             txtEmail.Clear();
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (txtStuName.Text != "" && txtEnrollNo.Text != "" && txtDepart.Text != ""
+                && txtSemester.Text != "" && txtContact.Text != "")
+            {
+                if (MessageBox.Show("내용을 제거하시겠습니까?", "Are you sure?",
+                    MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
+                {
+                    MySqlConnection con = new MySqlConnection();
+                    con.ConnectionString = "Server=서버주소;Database=데이터베이스명;Uid=사용자명;Pwd=비밀번호;";
+                    MySqlCommand cmd = new MySqlCommand();
+                    cmd.Connection = con;
+
+                    cmd.CommandText = "DELETE FROM NewStudent WHERE stuid = @rowid";
+                    cmd.Parameters.AddWithValue("@rowid", rowid);
+
+                    try
+                    {
+                        con.Open();
+                        cmd.ExecuteNonQuery();
+                        MessageBox.Show("삭제 완료", "",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        ViewStudent_Load(sender, e);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("삭제 중 오류 발생: " + ex.Message, "Error",
+                            MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    finally
+                    {
+                        con.Close();
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("내용을 선택해주세요", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

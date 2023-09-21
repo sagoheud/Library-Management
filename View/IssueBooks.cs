@@ -1,39 +1,42 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO.Ports;
+using System.Threading;
 using System.Windows.Forms;
+using MySql.Data.MySqlClient;
 
 namespace Library_Management.View
 {
     public partial class IssueBooks : Form
     {
+
         public IssueBooks()
         {
             InitializeComponent();
+            txtSearch.Text = Main.cardNum;
+            txtSearch.Enabled = false;
+            EventHandler e = new EventHandler(btnSearch_Click);
+
+            // btnSearch_Click 이벤트 핸들러를 호출
+            e.Invoke(this, EventArgs.Empty);
         }
+
 
         private void IssueBooks_Load(object sender, EventArgs e)
         {
-            SqlConnection con = new SqlConnection();
+            MySqlConnection con = new MySqlConnection();
             con.ConnectionString = Main.sourceDB;
-            SqlCommand cmd = new SqlCommand();
+            MySqlCommand cmd = new MySqlCommand();
             cmd.Connection = con;
             con.Open();
 
-            cmd = new SqlCommand("Select bName from NewBook", con);
-            SqlDataReader sdr = cmd.ExecuteReader();
+            cmd = new MySqlCommand("SELECT bName FROM NewBook", con);
+            MySqlDataReader sdr = cmd.ExecuteReader();
 
             while (sdr.Read())
             {
                 for (int i = 0; i < sdr.FieldCount; i++)
-                { 
+                {
                     cbBookName.Items.Add(sdr.GetString(i));
                 }
             }
@@ -46,25 +49,25 @@ namespace Library_Management.View
         private void btnSearch_Click(object sender, EventArgs e)
         {
             if (txtSearch.Text != "")
-            { 
+            {
                 String eid = txtSearch.Text;
 
-                SqlConnection con = new SqlConnection();
+                MySqlConnection con = new MySqlConnection();
                 con.ConnectionString = Main.sourceDB;
-                SqlCommand cmd = new SqlCommand();
+                MySqlCommand cmd = new MySqlCommand();
                 cmd.Connection = con;
 
-                cmd.CommandText = "Select * from NewStudent where stuEnroll = '" + eid+"'";
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                cmd.CommandText = "SELECT * FROM NewStudent WHERE stuEnroll = '" + eid + "'";
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                 DataSet ds = new DataSet();
                 da.Fill(ds);
 
                 //------------------------------------------------------------------------------------
-                // 얼마나 많은 책을 대여랄 수 있는지 계산하는 코드
+                // 얼마나 많은 책을 대여할 수 있는지 계산하는 코드
                 // 새로이 대여,반납에 대한 테이블 생성
-                cmd.CommandText = "Select count(std_enroll) from IRBook where std_enroll = '"
-                    + eid + "' and book_return_date is null";
-                SqlDataAdapter da2 = new SqlDataAdapter(cmd);
+                cmd.CommandText = "SELECT count(std_enroll) FROM IRBook WHERE std_enroll = '"
+                    + eid + "' AND book_return_date IS NULL";
+                MySqlDataAdapter da2 = new MySqlDataAdapter(cmd);
                 DataSet ds2 = new DataSet();
                 da2.Fill(ds2);
 
@@ -86,7 +89,7 @@ namespace Library_Management.View
                     txtSemester.Clear();
                     txtContact.Clear();
                     txtEmail.Clear();
-                    MessageBox.Show("정보가 없습니다.","Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                    MessageBox.Show("정보가 없습니다.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -106,19 +109,20 @@ namespace Library_Management.View
                     String book_name = cbBookName.Text;
                     String book_issue_date = txtIssueDate.Text;
 
-                    SqlConnection con = new SqlConnection();
+                    MySqlConnection con = new MySqlConnection();
                     con.ConnectionString = Main.sourceDB;
-                    SqlCommand cmd = new SqlCommand();
+                    MySqlCommand cmd = new MySqlCommand();
                     cmd.Connection = con;
 
                     con.Open();
-                    cmd.CommandText = "Insert into IRBook (std_enroll,std_name,std_depart,std_sem,std_contact,std_email,book_name,book_issue_date) values ('"
+                    cmd.CommandText = "INSERT INTO IRBook (std_enroll,std_name,std_depart,std_sem,std_contact,std_email,book_name,book_issue_date) VALUES ('"
                         + std_enroll + "','" + std_name + "','" + std_depart + "','" + std_sem + "'," + std_contact + ",'" + std_email + "','"
                         + book_name + "','" + book_issue_date + "')";
                     cmd.ExecuteNonQuery();
                     con.Close();
 
                     MessageBox.Show("책이 대여되었습니다.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
                 }
                 else
                 {
@@ -127,13 +131,8 @@ namespace Library_Management.View
             }
             else
             {
-                MessageBox.Show("회원정보를 선택해주세요.", "No Infomation", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("회원정보를 선택해주세요.", "No Information", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-
-        private void btnRefresh_Click(object sender, EventArgs e)
-        {
-            txtSearch.Clear();
         }
 
         private void txtSearch_TextChanged(object sender, EventArgs e)

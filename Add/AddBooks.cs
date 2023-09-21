@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -22,33 +23,48 @@ namespace Library_Management.Add
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (txtBookName.Text != "" && txtAuthor.Text != "" && txtPublic.Text != "" 
+            if (txtBookName.Text != "" && txtAuthor.Text != "" && txtPublic.Text != ""
                 && txtPrice.Text != "" && txtQty.Text != "")
             {
-                String bName = txtBookName.Text;
-                String bAuthor = txtAuthor.Text;
-                String bPublic = txtPublic.Text;
-                String bPDate = dateTimePicker1.Text;
-                Int64 bPrice = Int64.Parse(txtPrice.Text);
-                Int16 bQty = Int16.Parse(txtQty.Text);
+                string bName = txtBookName.Text;
+                string bAuthor = txtAuthor.Text;
+                string bPublic = txtPublic.Text;
+                string bPDate = dateTimePicker1.Text;
+                decimal bPrice = decimal.Parse(txtPrice.Text);
+                int bQty = int.Parse(txtQty.Text);
 
-                SqlConnection con = new SqlConnection();
-                con.ConnectionString = Main.sourceDB;
-                SqlCommand cmd = new SqlCommand();
-                cmd.Connection = con;
+                string connectionString = Main.sourceDB;
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                {
+                    try
+                    {
+                        connection.Open();
+                        string query = "INSERT INTO NewBook (bName, bAuthor, bPublic, bPDate, bPrice, bQty) " +
+                            "VALUES (@bName, @bAuthor, @bPublic, @bPDate, @bPrice, @bQty)";
+                        using (MySqlCommand cmd = new MySqlCommand(query, connection))
+                        {
+                            cmd.Parameters.AddWithValue("@bName", bName);
+                            cmd.Parameters.AddWithValue("@bAuthor", bAuthor);
+                            cmd.Parameters.AddWithValue("@bPublic", bPublic);
+                            cmd.Parameters.AddWithValue("@bPDate", bPDate);
+                            cmd.Parameters.AddWithValue("@bPrice", bPrice);
+                            cmd.Parameters.AddWithValue("@bQty", bQty);
 
-                con.Open();
-                cmd.CommandText = "Insert into NewBook (bName,bAuthor,bPublic,bPDate,bPrice,bQty) values ('"
-                    + bName + "','" + bAuthor + "','" + bPublic + "','" + bPDate + "'," + bPrice + "," + bQty + ")";
-                cmd.ExecuteNonQuery();
-                con.Close();
+                            cmd.ExecuteNonQuery();
+                        }
 
-                MessageBox.Show("저장 완료", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                txtBookName.Clear();
-                txtAuthor.Clear();
-                txtPublic.Clear();
-                txtPrice.Clear();
-                txtQty.Clear();
+                        MessageBox.Show("저장 완료", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        txtBookName.Clear();
+                        txtAuthor.Clear();
+                        txtPublic.Clear();
+                        txtPrice.Clear();
+                        txtQty.Clear();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("저장 중 오류 발생: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
             }
             else
             {
@@ -58,11 +74,11 @@ namespace Library_Management.Add
 
         private void btnCancle_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("저장되지 않은 데이터가 삭제됩니다.", "확실합니까?", 
+            if (MessageBox.Show("저장되지 않은 데이터가 삭제됩니다.", "확실합니까?",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
             {
                 this.Close();
-            } 
+            }
         }
 
         private void txtPrice_TextChanged(object sender, EventArgs e)
@@ -85,7 +101,7 @@ namespace Library_Management.Add
         private void txtQty_TextChanged(object sender, EventArgs e)
         {
             Int16 res = 0;
-            if(Int16.TryParse(txtQty.Text, out res))
+            if (Int16.TryParse(txtQty.Text, out res))
             {
                 if (txtQty.Text.Length > 3)
                 {

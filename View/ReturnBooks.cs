@@ -1,14 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using MySql.Data.MySqlClient;
 
 namespace Library_Management.View
 {
@@ -17,17 +10,23 @@ namespace Library_Management.View
         public ReturnBooks()
         {
             InitializeComponent();
+            txtSearch.Text = Main.cardNum;
+            txtSearch.Enabled = false;
+            EventHandler e = new EventHandler(btnSearch_Click);
+
+            // btnSearch_Click 이벤트 핸들러를 호출
+            e.Invoke(this, EventArgs.Empty);
         }
 
         private void ReturnBooks_Load(object sender, EventArgs e)
         {
-            SqlConnection con = new SqlConnection();
+            MySqlConnection con = new MySqlConnection();
             con.ConnectionString = Main.sourceDB;
-            SqlCommand cmd = new SqlCommand();
+            MySqlCommand cmd = new MySqlCommand();
             cmd.Connection = con;
 
-            cmd.CommandText = "Select * from IRBook where book_return_date IS NULL";
-            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            cmd.CommandText = "SELECT * FROM IRBook WHERE book_return_date IS NULL";
+            MySqlDataAdapter da = new MySqlDataAdapter(cmd);
             DataSet ds = new DataSet();
             da.Fill(ds);
 
@@ -41,24 +40,23 @@ namespace Library_Management.View
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            SqlConnection con = new SqlConnection();
+            MySqlConnection con = new MySqlConnection();
             con.ConnectionString = Main.sourceDB;
-            SqlCommand cmd = new SqlCommand();
+            MySqlCommand cmd = new MySqlCommand();
             cmd.Connection = con;
 
-            cmd.CommandText = "Select * from IRBook where std_enroll = '" + txtSearch.Text + "' and book_return_date IS NULL";
-            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            cmd.CommandText = "SELECT * FROM IRBook WHERE std_enroll = '" + txtSearch.Text + "' AND book_return_date IS NULL";
+            MySqlDataAdapter da = new MySqlDataAdapter(cmd);
             DataSet ds = new DataSet();
             da.Fill(ds);
 
             if (ds.Tables[0].Rows.Count != 0)
             {
                 dataGridView1.DataSource = ds.Tables[0];
-                // 열 내용 삭제 코드는 넣지 않아도 무방함
-                dataGridView1.Columns[0].Visible = false; // 인덱스 열 제거
+                dataGridView1.Columns[0].Visible = false;
                 for (int i = 3; i < 7; i++)
                 {
-                    dataGridView1.Columns[i].Visible = false; // 4번~7번 열 내용 제거
+                    dataGridView1.Columns[i].Visible = false;
                 }
             }
             else
@@ -88,14 +86,14 @@ namespace Library_Management.View
         {
             if (txtBookName.Text != "")
             {
-                SqlConnection con = new SqlConnection();
+                MySqlConnection con = new MySqlConnection();
                 con.ConnectionString = Main.sourceDB;
-                SqlCommand cmd = new SqlCommand();
+                MySqlCommand cmd = new MySqlCommand();
                 cmd.Connection = con;
 
                 con.Open();
-                cmd.CommandText = "Update IRBook set book_return_date = '" + txtReturnDate.Text +
-                    "' where std_enroll = '" + txtSearch.Text + "' and id = " + rowid + "";
+                cmd.CommandText = "UPDATE IRBook SET book_return_date = '" + txtReturnDate.Text +
+                    "' WHERE std_enroll = '" + txtSearch.Text + "' AND id = " + rowid + "";
                 cmd.ExecuteNonQuery();
                 con.Close();
 
@@ -111,14 +109,6 @@ namespace Library_Management.View
             }
         }
 
-        private void btnRefresh_Click(object sender, EventArgs e)
-        {
-            ReturnBooks_Load(sender, e);
-            txtBookName.Clear();
-            txtIssueDate.Clear();
-            txtSearch.Clear();
-        }
-
         private void btnCancel_Click(object sender, EventArgs e)
         {
             txtBookName.Clear();
@@ -128,6 +118,11 @@ namespace Library_Management.View
         private void btnExit_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -1,13 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
+using MySql.Data.MySqlClient;
 using System.Windows.Forms;
 
 namespace Library_Management.View
@@ -19,81 +12,85 @@ namespace Library_Management.View
             InitializeComponent();
         }
 
+        private MySqlConnection GetConnection()
+        {
+            string connectionString = Main.sourceDB;
+            return new MySqlConnection(connectionString);
+        }
+
         private void ViewBooks_Load(object sender, EventArgs e)
         {
-            SqlConnection con = new SqlConnection();
-            con.ConnectionString = Main.sourceDB;
-            SqlCommand cmd = new SqlCommand();
-            cmd.Connection = con;
-
-            cmd.CommandText = "Select * from NewBook";
-            SqlDataAdapter da = new SqlDataAdapter(cmd);
-            DataSet ds = new DataSet();
-            da.Fill(ds);
-
-            dataGridView1.DataSource = ds.Tables[0];
+            using (MySqlConnection con = GetConnection())
+            {
+                con.Open();
+                string query = "SELECT * FROM NewBook";
+                using (MySqlDataAdapter da = new MySqlDataAdapter(query, con))
+                {
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+                    dataGridView1.DataSource = dt;
+                }
+            }
         }
 
         int bid;
         Int64 rowid;
+        //int index;
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
             {
                 bid = int.Parse(dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString());
-                //MessageBox.Show(dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString());
-                // 열의 인덱스가 메시지 박스로 표시
             }
 
-            SqlConnection con = new SqlConnection();
-            con.ConnectionString = Main.sourceDB;
-            SqlCommand cmd = new SqlCommand();
-            cmd.Connection = con;
+            using (MySqlConnection con = GetConnection())
+            {
+                con.Open();
+                string query = "SELECT * FROM NewBook WHERE bid = " + bid;
+                using (MySqlDataAdapter da = new MySqlDataAdapter(query, con))
+                {
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+                    //index++;
+                    if (dt.Rows.Count > 0)
+                    {
 
-            cmd.CommandText = "Select * from NewBook where bid= " + bid + "";
-            SqlDataAdapter da = new SqlDataAdapter(cmd);
-            DataSet ds = new DataSet();
-            da.Fill(ds);
+                        rowid = Int64.Parse(dt.Rows[0][0].ToString());
+                        //rowid = index;
+                        txtBookName.Text = dt.Rows[0][1].ToString();
+                        txtAuthor.Text = dt.Rows[0][2].ToString();
+                        txtPublic.Text = dt.Rows[0][3].ToString();
+                        txtPDate.Text = dt.Rows[0][4].ToString();
+                        txtPrice.Text = dt.Rows[0][5].ToString();
+                        txtQty.Text = dt.Rows[0][6].ToString();
+                    }
+                }
+            }
+        }
 
-            rowid = Int64.Parse(ds.Tables[0].Rows[0][0].ToString());
-            txtBookName.Text = ds.Tables[0].Rows[0][1].ToString();
-            txtAuthor.Text = ds.Tables[0].Rows[0][2].ToString();
-            txtPublic.Text = ds.Tables[0].Rows[0][3].ToString();
-            txtPDate.Text = ds.Tables[0].Rows[0][4].ToString();
-            txtPrice.Text = ds.Tables[0].Rows[0][5].ToString();
-            txtQty.Text = ds.Tables[0].Rows[0][6].ToString();
+        private void btnCancle_Click(object sender, EventArgs e)
+        {
+            txtBookName.Clear();
+            txtAuthor.Clear();
+            txtPublic.Clear();
+            txtPDate.Value = DateTime.Today;
+            txtPrice.Clear();
+            txtQty.Clear();
         }
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
-            if (txtSearch.Text != "")
+            using (MySqlConnection con = GetConnection())
             {
-                SqlConnection con = new SqlConnection();
-                con.ConnectionString = Main.sourceDB;
-                SqlCommand cmd = new SqlCommand();
-                cmd.Connection = con;
-
-                cmd.CommandText = "Select * from NewBook where bName LIKE '" + txtSearch.Text + "%'";
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
-                DataSet ds = new DataSet();
-                da.Fill(ds);
-
-                dataGridView1.DataSource = ds.Tables[0];
-            }
-            else 
-            {
-                SqlConnection con = new SqlConnection();
-                con.ConnectionString = Main.sourceDB;
-                SqlCommand cmd = new SqlCommand();
-                cmd.Connection = con;
-
-                cmd.CommandText = "Select * from NewBook";
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
-                DataSet ds = new DataSet();
-                da.Fill(ds);
-
-                dataGridView1.DataSource = ds.Tables[0];
+                con.Open();
+                string query = "SELECT * FROM NewBook WHERE bName LIKE '%" + txtSearch.Text + "%'";
+                using (MySqlDataAdapter da = new MySqlDataAdapter(query, con))
+                {
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+                    dataGridView1.DataSource = dt;
+                }
             }
         }
 
@@ -120,24 +117,27 @@ namespace Library_Management.View
                     String bAuthor = txtAuthor.Text;
                     String bPublic = txtPublic.Text;
                     String bPDate = txtPDate.Text;
-                    Int64 bPrice = Int64.Parse(txtPrice.Text);
-                    Int16 bQty = Int16.Parse(txtQty.Text);
+                    decimal bPrice = decimal.Parse(txtPrice.Text);
+                    int bQty = int.Parse(txtQty.Text);
 
-                    SqlConnection con = new SqlConnection();
-                    con.ConnectionString = Main.sourceDB;
-                    SqlCommand cmd = new SqlCommand();
-                    cmd.Connection = con;
+                    using (MySqlConnection con = GetConnection())
+                    {
+                        con.Open();
+                        string query = "UPDATE NewBook SET bName = @bName, bAuthor = @bAuthor, " +
+                            "bPublic = @bPublic, bPDate = @bPDate, bPrice = @bPrice, bQty = @bQty WHERE bid = @bid";
+                        using (MySqlCommand cmd = new MySqlCommand(query, con))
+                        {
+                            cmd.Parameters.AddWithValue("@bName", bName);
+                            cmd.Parameters.AddWithValue("@bAuthor", bAuthor);
+                            cmd.Parameters.AddWithValue("@bPublic", bPublic);
+                            cmd.Parameters.AddWithValue("@bPDate", bPDate);
+                            cmd.Parameters.AddWithValue("@bPrice", bPrice);
+                            cmd.Parameters.AddWithValue("@bQty", bQty);
+                            cmd.Parameters.AddWithValue("@bid", rowid);
 
-                    cmd.CommandText = "Update NewBook set bName = '" + bName + "',bAuthor = '" + bAuthor +
-                        "',bPublic = '" +bPublic + "',bPDate = '" + bPDate + "',bPrice = " + bPrice +
-                        ",bQty = " + bQty + " where bid = " + rowid;
-                    SqlDataAdapter da = new SqlDataAdapter(cmd);
-                    DataSet ds = new DataSet();
-                    da.Fill(ds);
-
-                    MessageBox.Show("저장 완료", "", 
-                        MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    ViewBooks_Load(sender,e);
+                            cmd.ExecuteNonQuery();
+                        }
+                    }
                 }
             }
             else
@@ -154,35 +154,22 @@ namespace Library_Management.View
                 if (MessageBox.Show("내용을 제거하시겠습니까?", "Are you sure?",
                 MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
                 {
-                    SqlConnection con = new SqlConnection();
-                    con.ConnectionString = Main.sourceDB;
-                    SqlCommand cmd = new SqlCommand();
-                    cmd.Connection = con;
-
-                    cmd.CommandText = "Delete from NewBook where bid = " + rowid;
-                    SqlDataAdapter da = new SqlDataAdapter(cmd);
-                    DataSet ds = new DataSet();
-                    da.Fill(ds);
-
-                    MessageBox.Show("삭제 완료", "",
-                        MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    ViewBooks_Load(sender, e);
+                    using (MySqlConnection con = GetConnection())
+                    {
+                        con.Open();
+                        string query = "DELETE FROM NewBook WHERE bid = @bid";
+                        using (MySqlCommand cmd = new MySqlCommand(query, con))
+                        {
+                            cmd.Parameters.AddWithValue("@bid", rowid);
+                            cmd.ExecuteNonQuery();
+                        }
+                    }
                 }
             }
             else
             {
                 MessageBox.Show("내용을 선택해주세요", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-
-        private void btnCancle_Click(object sender, EventArgs e)
-        {
-            txtBookName.Clear();
-            txtAuthor.Clear();
-            txtPublic.Clear();
-            txtPDate.Value = DateTime.Today;
-            txtPrice.Clear();
-            txtQty.Clear();
         }
     }
 }

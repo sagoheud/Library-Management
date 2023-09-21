@@ -1,15 +1,7 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using MySql.Data.MySqlClient;
 using System.Windows.Forms;
-using System.Xml.Linq;
 
 namespace Library_Management
 {
@@ -20,7 +12,11 @@ namespace Library_Management
             InitializeComponent();
         }
 
-        public int id = 0;
+        private MySqlConnection GetConnection()
+        {
+            string connectionString = Main.sourceDB;
+            return new MySqlConnection(connectionString);
+        }
 
         private void btnExit_Click(object sender, EventArgs e)
         {
@@ -29,19 +25,18 @@ namespace Library_Management
 
         private void btnSignup_Click(object sender, EventArgs e)
         {
-            string conString = Main.sourceDB;
-            using (SqlConnection connection = new SqlConnection(conString))
+            using (MySqlConnection connection = GetConnection())
             {
                 connection.Open();
 
-                if (txtAccess.Text == "147258") // 인증번호 일치할 시
+                if (txtAccess.Text == "1234") // 인증번호 일치할 시
                 {
                     if (txtUsername.Text.Length >= 3 && txtUsername.Text.Length <= 8)
                     {
                         if (txtPassword.Text.Length >= 3 && txtPassword.Text.Length <= 8)
                         {
-                            string qry = "Insert into Login (username, pass) Values(@username, @pass)";
-                            using (SqlCommand cmd = new SqlCommand(qry, connection))
+                            string query = "INSERT INTO Login (username, pass) VALUES (@username, @pass)";
+                            using (MySqlCommand cmd = new MySqlCommand(query, connection))
                             {
                                 cmd.Parameters.AddWithValue("@username", txtUsername.Text);
                                 cmd.Parameters.AddWithValue("@pass", txtPassword.Text);
