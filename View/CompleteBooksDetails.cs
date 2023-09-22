@@ -31,5 +31,10 @@ namespace Library_Management.View
             da2.Fill(ds2);
             dataGridView2.DataSource = ds2.Tables[0];
         }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
