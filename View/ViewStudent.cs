@@ -74,49 +74,6 @@ namespace Library_Management.View
             }
         }
 
-        private void txtSearch_TextChanged(object sender, EventArgs e)
-        {
-            if (txtSearch.Text != "")
-            {
-                using (MySqlConnection con = GetConnection())
-                {
-                    con.Open();
-                    string query = "SELECT * FROM NewStudent WHERE stuName LIKE '" + txtSearch.Text + "%'";
-                    using (MySqlDataAdapter da = new MySqlDataAdapter(query, con))
-                    {
-                        DataTable dt = new DataTable();
-                        da.Fill(dt);
-                        dataGridView1.DataSource = dt;
-                    }
-                }
-            }
-            else
-            {
-                using (MySqlConnection con = GetConnection())
-                {
-                    con.Open();
-                    string query = "SELECT * FROM NewStudent";
-                    using (MySqlDataAdapter da = new MySqlDataAdapter(query, con))
-                    {
-                        DataTable dt = new DataTable();
-                        da.Fill(dt);
-                        dataGridView1.DataSource = dt;
-                    }
-                }
-            }
-        }
-
-        private void btnRefresh_Click(object sender, EventArgs e)
-        {
-            txtSearch.Clear();
-            txtStuName.Clear();
-            txtEnrollNo.Clear();
-            txtDepart.Clear();
-            txtSemester.Clear();
-            txtContact.Clear();
-            txtEmail.Clear();
-        }
-
         private void btnUpdate_Click(object sender, EventArgs e)
         {
             if (txtStuName.Text != "" && txtEnrollNo.Text != "" && txtDepart.Text != ""
@@ -151,6 +108,8 @@ namespace Library_Management.View
                             cmd.ExecuteNonQuery();
                         }
                     }
+                    MessageBox.Show("변경 완료");
+                    reset();
                 }
             }
             else
@@ -167,6 +126,7 @@ namespace Library_Management.View
             txtSemester.Clear();
             txtContact.Clear();
             txtEmail.Clear();
+            this.Close();
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -177,36 +137,71 @@ namespace Library_Management.View
                 if (MessageBox.Show("내용을 제거하시겠습니까?", "Are you sure?",
                     MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
                 {
-                    MySqlConnection con = new MySqlConnection();
-                    con.ConnectionString = "Server=서버주소;Database=데이터베이스명;Uid=사용자명;Pwd=비밀번호;";
-                    MySqlCommand cmd = new MySqlCommand();
-                    cmd.Connection = con;
-
-                    cmd.CommandText = "DELETE FROM NewStudent WHERE stuid = @rowid";
-                    cmd.Parameters.AddWithValue("@rowid", rowid);
-
-                    try
+                    using (MySqlConnection con = GetConnection())
                     {
                         con.Open();
-                        cmd.ExecuteNonQuery();
-                        MessageBox.Show("삭제 완료", "",
-                            MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        ViewStudent_Load(sender, e);
+                        string query = "DELETE FROM NewStudent WHERE stuid = @rowid";
+                        using (MySqlCommand cmd = new MySqlCommand(query, con))
+                        {
+                            cmd.Parameters.AddWithValue("@rowid", rowid);
+                            cmd.ExecuteNonQuery();
+                        }
                     }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("삭제 중 오류 발생: " + ex.Message, "Error",
-                            MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                    finally
-                    {
-                        con.Close();
-                    }
+                    MessageBox.Show("삭제완료");
+                    reset();
+
                 }
             }
             else
             {
                 MessageBox.Show("내용을 선택해주세요", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            if (txtSearch.Text != "")
+            {
+                using (MySqlConnection con = GetConnection())
+                {
+                    con.Open();
+                    string query = "SELECT * FROM NewStudent WHERE stuName LIKE '" + txtSearch.Text + "%'";
+                    using (MySqlDataAdapter da = new MySqlDataAdapter(query, con))
+                    {
+                        DataTable dt = new DataTable();
+                        da.Fill(dt);
+                        dataGridView1.DataSource = dt;
+                    }
+                }
+            }
+            else
+            {
+                using (MySqlConnection con = GetConnection())
+                {
+                    con.Open();
+                    string query = "SELECT * FROM NewStudent";
+                    using (MySqlDataAdapter da = new MySqlDataAdapter(query, con))
+                    {
+                        DataTable dt = new DataTable();
+                        da.Fill(dt);
+                        dataGridView1.DataSource = dt;
+                    }
+                }
+            }
+        }
+
+        private void reset()
+        {
+            using (MySqlConnection con = GetConnection())
+            {
+                con.Open();
+                string query = "SELECT * FROM NewStudent";
+                using (MySqlDataAdapter da = new MySqlDataAdapter(query, con))
+                {
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+                    dataGridView1.DataSource = dt;
+                }
             }
         }
     }

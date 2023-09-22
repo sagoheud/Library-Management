@@ -21,6 +21,12 @@ namespace Library_Management.View
             e.Invoke(this, EventArgs.Empty);
         }
 
+        private MySqlConnection GetConnection()
+        {
+            string connectionString = Main.sourceDB;
+            return new MySqlConnection(connectionString);
+        }
+
 
         private void IssueBooks_Load(object sender, EventArgs e)
         {
@@ -30,7 +36,7 @@ namespace Library_Management.View
             cmd.Connection = con;
             con.Open();
 
-            cmd = new MySqlCommand("SELECT bName FROM NewBook", con);
+            cmd = new MySqlCommand("SELECT bName FROM NewBook Where bQty>0", con);
             MySqlDataReader sdr = cmd.ExecuteReader();
 
             while (sdr.Read())
@@ -90,50 +96,76 @@ namespace Library_Management.View
                     txtContact.Clear();
                     txtEmail.Clear();
                     MessageBox.Show("정보가 없습니다.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    this.Close();
                 }
             }
         }
 
         private void btnIssue_Click(object sender, EventArgs e)
         {
-            if (txtStuName.Text != "")
-            {
-                if (cbBookName.SelectedIndex != -1 && count <= 2)
-                {
-                    String std_enroll = txtSearch.Text;
-                    String std_name = txtStuName.Text;
-                    String std_depart = txtDepart.Text;
-                    String std_sem = txtSemester.Text;
-                    Int64 std_contact = Int64.Parse(txtContact.Text);
-                    String std_email = txtEmail.Text;
-                    String book_name = cbBookName.Text;
-                    String book_issue_date = txtIssueDate.Text;
-
-                    MySqlConnection con = new MySqlConnection();
-                    con.ConnectionString = Main.sourceDB;
-                    MySqlCommand cmd = new MySqlCommand();
-                    cmd.Connection = con;
-
-                    con.Open();
-                    cmd.CommandText = "INSERT INTO IRBook (std_enroll,std_name,std_depart,std_sem,std_contact,std_email,book_name,book_issue_date) VALUES ('"
-                        + std_enroll + "','" + std_name + "','" + std_depart + "','" + std_sem + "'," + std_contact + ",'" + std_email + "','"
-                        + book_name + "','" + book_issue_date + "')";
-                    cmd.ExecuteNonQuery();
-                    con.Close();
-
-                    MessageBox.Show("책이 대여되었습니다.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                }
-                else
-                {
-                    MessageBox.Show("대여할 책을 선택하시거나,\n대여 가능한 개수를 초과중입니다.", "No Issue", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            else
+            if (string.IsNullOrWhiteSpace(txtStuName.Text))
             {
                 MessageBox.Show("회원정보를 선택해주세요.", "No Information", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (cbBookName.SelectedIndex == -1 || count > 2)
+            {
+                MessageBox.Show("대여할 책을 선택하시거나,\n대여 가능한 개수를 초과중입니다.", "No Issue", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            try
+            {
+                string std_enroll = txtSearch.Text;
+                string std_name = txtStuName.Text;
+                string std_depart = txtDepart.Text;
+                string std_sem = txtSemester.Text;
+                long std_contact = long.Parse(txtContact.Text);
+                string std_email = txtEmail.Text;
+                string book_name = cbBookName.Text;
+                string book_issue_date = txtIssueDate.Text;
+
+                using (MySqlConnection con = new MySqlConnection(Main.sourceDB))
+                {
+                    con.Open();
+
+                    string insertQuery = "INSERT INTO IRBook (std_enroll, std_name, std_depart, std_sem, std_contact, std_email, book_name, book_issue_date) " +
+                        "VALUES (@std_enroll, @std_name, @std_depart, @std_sem, @std_contact, @std_email, @book_name, @book_issue_date)";
+
+                    using (MySqlCommand insertCommand = new MySqlCommand(insertQuery, con))
+                    {
+                        insertCommand.Parameters.AddWithValue("@std_enroll", std_enroll);
+                        insertCommand.Parameters.AddWithValue("@std_name", std_name);
+                        insertCommand.Parameters.AddWithValue("@std_depart", std_depart);
+                        insertCommand.Parameters.AddWithValue("@std_sem", std_sem);
+                        insertCommand.Parameters.AddWithValue("@std_contact", std_contact);
+                        insertCommand.Parameters.AddWithValue("@std_email", std_email);
+                        insertCommand.Parameters.AddWithValue("@book_name", book_name);
+                        insertCommand.Parameters.AddWithValue("@book_issue_date", book_issue_date);
+
+                        insertCommand.ExecuteNonQuery();
+                    }
+
+                    string updateQuery = "UPDATE NewBook SET bQty = (bQty - 1) WHERE bName = @book_name";
+
+                    using (MySqlCommand updateCommand = new MySqlCommand(updateQuery, con))
+                    {
+                        updateCommand.Parameters.AddWithValue("@book_name", book_name);
+                        updateCommand.ExecuteNonQuery();
+                    }
+                }
+
+                MessageBox.Show("책이 대여되었습니다.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                reset();
+                
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("오류가 발생했습니다: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
@@ -150,6 +182,22 @@ namespace Library_Management.View
         private void btnExit_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void reset()
+        {
+            using (MySqlConnection con = GetConnection())
+            {
+                con.Open();
+                string query = "SELECT bName FROM NewBook Where bQty>0";
+                using (MySqlDataAdapter da = new MySqlDataAdapter(query, con))
+                {
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+                    
+                }
+                con.Close();
+            }
         }
     }
 }

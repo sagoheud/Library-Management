@@ -29,7 +29,7 @@ namespace Library_Management
             {
                 connection.Open();
 
-                if (txtAccess.Text == "1234") // 인증번호 일치할 시
+                if (txtAccess.Text == "KHJ_CYS") // 인증번호 일치할 시
                 {
                     if (txtUsername.Text.Length >= 3 && txtUsername.Text.Length <= 8)
                     {

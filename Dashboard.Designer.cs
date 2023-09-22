@@ -37,8 +37,9 @@
             this.btnStudentView = new System.Windows.Forms.ToolStripMenuItem();
             this.btnBookIssue = new System.Windows.Forms.ToolStripMenuItem();
             this.btnBookReturn = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnBookDetail = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.btnExit = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnTest = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -52,11 +53,12 @@
             this.btnStudent,
             this.btnBookIssue,
             this.btnBookReturn,
-            this.btnBookDetail,
-            this.btnExit});
+            this.toolStripMenuItem1,
+            this.btnExit,
+            this.btnTest});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1100, 70);
+            this.menuStrip1.Size = new System.Drawing.Size(1295, 70);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -155,17 +157,17 @@
             this.btnBookReturn.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnBookReturn.Click += new System.EventHandler(this.btnBookReturn_Click);
             // 
-            // btnBookDetail
+            // toolStripMenuItem1
             // 
-            this.btnBookDetail.AutoSize = false;
-            this.btnBookDetail.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBookDetail.Image = global::Library_Management.Properties.Resources.free_icon_books_2097068;
-            this.btnBookDetail.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnBookDetail.Name = "btnBookDetail";
-            this.btnBookDetail.Size = new System.Drawing.Size(172, 70);
-            this.btnBookDetail.Text = "도서 상세 설명";
-            this.btnBookDetail.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnBookDetail.Click += new System.EventHandler(this.btnBookDetail_Click);
+            this.toolStripMenuItem1.AutoSize = false;
+            this.toolStripMenuItem1.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStripMenuItem1.Image = global::Library_Management.Properties.Resources.free_icon_books_2097068;
+            this.toolStripMenuItem1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(172, 70);
+            this.toolStripMenuItem1.Text = "도서 상세 설명";
+            this.toolStripMenuItem1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
             // btnExit
             // 
@@ -180,13 +182,24 @@
             this.btnExit.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
+            // btnTest
+            // 
+            this.btnTest.AutoSize = false;
+            this.btnTest.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTest.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnTest.Name = "btnTest";
+            this.btnTest.Size = new System.Drawing.Size(122, 70);
+            this.btnTest.Text = "(테스트)열람실";
+            this.btnTest.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnTest.Click += new System.EventHandler(this.btnTest_Click);
+            // 
             // Dashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::Library_Management.Properties.Resources.library_4589730_1280;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(1100, 600);
+            this.ClientSize = new System.Drawing.Size(1295, 600);
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MainMenuStrip = this.menuStrip1;
@@ -211,7 +224,8 @@
         private System.Windows.Forms.ToolStripMenuItem btnStudentView;
         private System.Windows.Forms.ToolStripMenuItem btnBookIssue;
         private System.Windows.Forms.ToolStripMenuItem btnBookReturn;
-        private System.Windows.Forms.ToolStripMenuItem btnBookDetail;
+        private System.Windows.Forms.ToolStripMenuItem btnTest;
         private System.Windows.Forms.ToolStripMenuItem btnExit;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
     }
 }

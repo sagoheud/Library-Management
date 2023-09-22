@@ -77,32 +77,7 @@ namespace Library_Management.View
             txtPDate.Value = DateTime.Today;
             txtPrice.Clear();
             txtQty.Clear();
-        }
-
-        private void txtSearch_TextChanged(object sender, EventArgs e)
-        {
-            using (MySqlConnection con = GetConnection())
-            {
-                con.Open();
-                string query = "SELECT * FROM NewBook WHERE bName LIKE '%" + txtSearch.Text + "%'";
-                using (MySqlDataAdapter da = new MySqlDataAdapter(query, con))
-                {
-                    DataTable dt = new DataTable();
-                    da.Fill(dt);
-                    dataGridView1.DataSource = dt;
-                }
-            }
-        }
-
-        private void btnRefresh_Click(object sender, EventArgs e)
-        {
-            txtSearch.Clear();
-            txtBookName.Clear();
-            txtAuthor.Clear();
-            txtPublic.Clear();
-            txtPDate.Value = DateTime.Today;
-            txtPrice.Clear();
-            txtQty.Clear();
+            this.Close();
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
@@ -138,6 +113,8 @@ namespace Library_Management.View
                             cmd.ExecuteNonQuery();
                         }
                     }
+                    MessageBox.Show("변경완료");
+                    reset();
                 }
             }
             else
@@ -164,11 +141,49 @@ namespace Library_Management.View
                             cmd.ExecuteNonQuery();
                         }
                     }
+                    MessageBox.Show("삭제완료");
+                    reset();
                 }
             }
             else
             {
                 MessageBox.Show("내용을 선택해주세요", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void reset()
+        {
+            using (MySqlConnection con = GetConnection())
+            {
+                con.Open();
+                string query = "SELECT * FROM NewBook";
+                using (MySqlDataAdapter da = new MySqlDataAdapter(query, con))
+                {
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+                    dataGridView1.DataSource = dt;
+                }
+            }
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            using (MySqlConnection con = GetConnection())
+            {
+                con.Open();
+                string query = "SELECT * FROM NewBook WHERE bName LIKE '%" + txtSearch.Text + "%'";
+                using (MySqlDataAdapter da = new MySqlDataAdapter(query, con))
+                {
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+                    dataGridView1.DataSource = dt;
+                }
+                txtBookName.Clear();
+                txtAuthor.Clear();
+                txtPublic.Clear();
+                txtPDate.Value = DateTime.Today;
+                txtPrice.Clear();
+                txtQty.Clear();
             }
         }
     }

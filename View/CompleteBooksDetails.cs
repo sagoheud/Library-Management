@@ -19,13 +19,13 @@ namespace Library_Management.View
             MySqlCommand cmd = new MySqlCommand();
             cmd.Connection = con;
 
-            cmd.CommandText = "SELECT * FROM IRBook WHERE book_return_date IS NULL";
+            cmd.CommandText = "SELECT std_enroll,std_name,std_contact,std_email,book_name,book_issue_date, book_return_date FROM IRBook WHERE book_return_date IS NULL";
             MySqlDataAdapter da1 = new MySqlDataAdapter(cmd);
             DataSet ds1 = new DataSet();
             da1.Fill(ds1);
             dataGridView1.DataSource = ds1.Tables[0];
 
-            cmd.CommandText = "SELECT * FROM IRBook WHERE book_return_date IS NOT NULL";
+            cmd.CommandText = "SELECT std_enroll,std_name,std_contact,std_email,book_name,book_issue_date, book_return_date FROM IRBook WHERE book_return_date IS NOT NULL";
             MySqlDataAdapter da2 = new MySqlDataAdapter(cmd);
             DataSet ds2 = new DataSet();
             da2.Fill(ds2);

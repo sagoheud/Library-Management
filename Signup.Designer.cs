@@ -143,12 +143,14 @@
             // 
             this.txtAccess.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
             this.txtAccess.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtAccess.Enabled = false;
             this.txtAccess.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtAccess.ForeColor = System.Drawing.Color.White;
+            this.txtAccess.ForeColor = System.Drawing.Color.Black;
             this.txtAccess.Location = new System.Drawing.Point(59, 251);
             this.txtAccess.Name = "txtAccess";
             this.txtAccess.Size = new System.Drawing.Size(207, 22);
             this.txtAccess.TabIndex = 2;
+            this.txtAccess.Text = "KHJ_CYS";
             // 
             // txtPassword
             // 

@@ -46,16 +46,25 @@
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnUpdate = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.btnRefresh = new System.Windows.Forms.Button();
+            this.btnSearch = new System.Windows.Forms.Button();
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.최신순 = new System.Windows.Forms.ToolStripMenuItem();
+            this.도서제목 = new System.Windows.Forms.ToolStripMenuItem();
+            this.저자 = new System.Windows.Forms.ToolStripMenuItem();
+            this.출판사 = new System.Windows.Forms.ToolStripMenuItem();
+            this.입고일 = new System.Windows.Forms.ToolStripMenuItem();
+            this.가격 = new System.Windows.Forms.ToolStripMenuItem();
+            this.수량 = new System.Windows.Forms.ToolStripMenuItem();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel2
@@ -79,9 +88,9 @@
             this.panel2.Controls.Add(this.btnCancle);
             this.panel2.Controls.Add(this.btnDelete);
             this.panel2.Controls.Add(this.btnUpdate);
-            this.panel2.Location = new System.Drawing.Point(12, 431);
+            this.panel2.Location = new System.Drawing.Point(12, 477);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(910, 259);
+            this.panel2.Size = new System.Drawing.Size(944, 259);
             this.panel2.TabIndex = 3;
             // 
             // txtEmail
@@ -90,7 +99,7 @@
             this.txtEmail.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtEmail.Location = new System.Drawing.Point(593, 152);
             this.txtEmail.Name = "txtEmail";
-            this.txtEmail.Size = new System.Drawing.Size(244, 29);
+            this.txtEmail.Size = new System.Drawing.Size(244, 34);
             this.txtEmail.TabIndex = 5;
             // 
             // txtContact
@@ -99,7 +108,7 @@
             this.txtContact.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtContact.Location = new System.Drawing.Point(593, 93);
             this.txtContact.Name = "txtContact";
-            this.txtContact.Size = new System.Drawing.Size(244, 29);
+            this.txtContact.Size = new System.Drawing.Size(244, 34);
             this.txtContact.TabIndex = 4;
             // 
             // txtSemester
@@ -107,7 +116,7 @@
             this.txtSemester.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSemester.Location = new System.Drawing.Point(593, 32);
             this.txtSemester.Name = "txtSemester";
-            this.txtSemester.Size = new System.Drawing.Size(244, 29);
+            this.txtSemester.Size = new System.Drawing.Size(244, 34);
             this.txtSemester.TabIndex = 3;
             // 
             // txtDepart
@@ -115,7 +124,7 @@
             this.txtDepart.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtDepart.Location = new System.Drawing.Point(156, 152);
             this.txtDepart.Name = "txtDepart";
-            this.txtDepart.Size = new System.Drawing.Size(244, 29);
+            this.txtDepart.Size = new System.Drawing.Size(244, 34);
             this.txtDepart.TabIndex = 2;
             // 
             // txtEnrollNo
@@ -123,7 +132,7 @@
             this.txtEnrollNo.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtEnrollNo.Location = new System.Drawing.Point(156, 93);
             this.txtEnrollNo.Name = "txtEnrollNo";
-            this.txtEnrollNo.Size = new System.Drawing.Size(244, 29);
+            this.txtEnrollNo.Size = new System.Drawing.Size(244, 34);
             this.txtEnrollNo.TabIndex = 1;
             // 
             // txtStuName
@@ -131,7 +140,7 @@
             this.txtStuName.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtStuName.Location = new System.Drawing.Point(156, 32);
             this.txtStuName.Name = "txtStuName";
-            this.txtStuName.Size = new System.Drawing.Size(244, 29);
+            this.txtStuName.Size = new System.Drawing.Size(244, 34);
             this.txtStuName.TabIndex = 0;
             // 
             // label9
@@ -140,7 +149,7 @@
             this.label9.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.Location = new System.Drawing.Point(497, 155);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(66, 21);
+            this.label9.Size = new System.Drawing.Size(83, 28);
             this.label9.TabIndex = 18;
             this.label9.Text = "이메일 :";
             // 
@@ -150,7 +159,7 @@
             this.label10.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.Location = new System.Drawing.Point(497, 96);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(66, 21);
+            this.label10.Size = new System.Drawing.Size(83, 28);
             this.label10.TabIndex = 19;
             this.label10.Text = "연락처 :";
             // 
@@ -160,7 +169,7 @@
             this.label11.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label11.Location = new System.Drawing.Point(497, 35);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(50, 21);
+            this.label11.Size = new System.Drawing.Size(63, 28);
             this.label11.TabIndex = 20;
             this.label11.Text = "학년 :";
             // 
@@ -170,7 +179,7 @@
             this.label12.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label12.Location = new System.Drawing.Point(60, 155);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(50, 21);
+            this.label12.Size = new System.Drawing.Size(63, 28);
             this.label12.TabIndex = 21;
             this.label12.Text = "학부 :";
             // 
@@ -180,7 +189,7 @@
             this.label13.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label13.Location = new System.Drawing.Point(60, 96);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(82, 21);
+            this.label13.Size = new System.Drawing.Size(103, 28);
             this.label13.TabIndex = 22;
             this.label13.Text = "회원번호 :";
             // 
@@ -190,7 +199,7 @@
             this.label14.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label14.Location = new System.Drawing.Point(60, 35);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(86, 21);
+            this.label14.Size = new System.Drawing.Size(109, 28);
             this.label14.TabIndex = 23;
             this.label14.Text = "학생 이름 :";
             // 
@@ -258,35 +267,35 @@
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle1;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 182);
+            this.dataGridView1.Location = new System.Drawing.Point(12, 233);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersVisible = false;
+            this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(910, 229);
+            this.dataGridView1.Size = new System.Drawing.Size(944, 229);
             this.dataGridView1.TabIndex = 2;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             // 
-            // btnRefresh
+            // btnSearch
             // 
-            this.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnRefresh.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRefresh.Location = new System.Drawing.Point(605, 145);
-            this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(64, 29);
-            this.btnRefresh.TabIndex = 1;
-            this.btnRefresh.Text = "재정렬";
-            this.btnRefresh.UseVisualStyleBackColor = true;
-            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnSearch.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSearch.Location = new System.Drawing.Point(605, 145);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(64, 29);
+            this.btnSearch.TabIndex = 1;
+            this.btnSearch.Text = "검색";
+            this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // txtSearch
             // 
             this.txtSearch.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSearch.Location = new System.Drawing.Point(359, 147);
             this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(233, 25);
+            this.txtSearch.Size = new System.Drawing.Size(233, 29);
             this.txtSearch.TabIndex = 0;
-            this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
             // 
             // label2
             // 
@@ -294,7 +303,7 @@
             this.label2.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(256, 147);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(93, 25);
+            this.label2.Size = new System.Drawing.Size(118, 32);
             this.label2.TabIndex = 7;
             this.label2.Text = "학생 이름";
             // 
@@ -308,7 +317,7 @@
             this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Location = new System.Drawing.Point(12, 13);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(910, 124);
+            this.panel1.Size = new System.Drawing.Size(944, 124);
             this.panel1.TabIndex = 6;
             // 
             // label1
@@ -317,7 +326,7 @@
             this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(431, 48);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(172, 32);
+            this.label1.Size = new System.Drawing.Size(214, 41);
             this.label1.TabIndex = 3;
             this.label1.Text = "학생 정보 보기";
             // 
@@ -331,18 +340,87 @@
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
             // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.menuStrip1.Dock = System.Windows.Forms.DockStyle.None;
+            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.최신순,
+            this.도서제목,
+            this.저자,
+            this.출판사,
+            this.입고일,
+            this.가격,
+            this.수량});
+            this.menuStrip1.Location = new System.Drawing.Point(12, 200);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(939, 30);
+            this.menuStrip1.TabIndex = 8;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // 최신순
+            // 
+            this.최신순.AutoSize = false;
+            this.최신순.Name = "최신순";
+            this.최신순.Size = new System.Drawing.Size(133, 26);
+            this.최신순.Text = "등록순";
+            // 
+            // 도서제목
+            // 
+            this.도서제목.AutoSize = false;
+            this.도서제목.Name = "도서제목";
+            this.도서제목.Size = new System.Drawing.Size(133, 26);
+            this.도서제목.Text = "학생이름";
+            // 
+            // 저자
+            // 
+            this.저자.AutoSize = false;
+            this.저자.Name = "저자";
+            this.저자.Size = new System.Drawing.Size(133, 26);
+            this.저자.Text = "회원번호";
+            // 
+            // 출판사
+            // 
+            this.출판사.AutoSize = false;
+            this.출판사.Name = "출판사";
+            this.출판사.Size = new System.Drawing.Size(133, 26);
+            this.출판사.Text = "학부";
+            // 
+            // 입고일
+            // 
+            this.입고일.AutoSize = false;
+            this.입고일.Name = "입고일";
+            this.입고일.Size = new System.Drawing.Size(133, 26);
+            this.입고일.Text = "학년";
+            // 
+            // 가격
+            // 
+            this.가격.AutoSize = false;
+            this.가격.Name = "가격";
+            this.가격.Size = new System.Drawing.Size(133, 26);
+            this.가격.Text = "연락처";
+            // 
+            // 수량
+            // 
+            this.수량.AutoSize = false;
+            this.수량.Name = "수량";
+            this.수량.Size = new System.Drawing.Size(133, 26);
+            this.수량.Text = "이메일";
+            // 
             // ViewStudent
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(82)))), ((int)(((byte)(185)))), ((int)(((byte)(215)))));
-            this.ClientSize = new System.Drawing.Size(934, 703);
+            this.ClientSize = new System.Drawing.Size(968, 748);
+            this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.btnRefresh);
+            this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.txtSearch);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.panel1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "ViewStudent";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ViewStudent";
@@ -353,6 +431,8 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -365,7 +445,7 @@
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnUpdate;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Button btnRefresh;
+        private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.TextBox txtSearch;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Panel panel1;
@@ -383,5 +463,13 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem 최신순;
+        private System.Windows.Forms.ToolStripMenuItem 도서제목;
+        private System.Windows.Forms.ToolStripMenuItem 저자;
+        private System.Windows.Forms.ToolStripMenuItem 출판사;
+        private System.Windows.Forms.ToolStripMenuItem 입고일;
+        private System.Windows.Forms.ToolStripMenuItem 가격;
+        private System.Windows.Forms.ToolStripMenuItem 수량;
     }
 }

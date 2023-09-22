@@ -25,7 +25,7 @@ namespace Library_Management.View
             MySqlCommand cmd = new MySqlCommand();
             cmd.Connection = con;
 
-            cmd.CommandText = "SELECT * FROM IRBook WHERE book_return_date IS NULL";
+            cmd.CommandText = "SELECT * FROM IRBook WHERE std_enroll='"+txtSearch.Text+ "' AND book_return_date IS NULL";
             MySqlDataAdapter da = new MySqlDataAdapter(cmd);
             DataSet ds = new DataSet();
             da.Fill(ds);
@@ -84,30 +84,51 @@ namespace Library_Management.View
 
         private void btnReturn_Click(object sender, EventArgs e)
         {
-            if (txtBookName.Text != "")
+            if (string.IsNullOrWhiteSpace(txtBookName.Text))
             {
-                MySqlConnection con = new MySqlConnection();
-                con.ConnectionString = Main.sourceDB;
-                MySqlCommand cmd = new MySqlCommand();
-                cmd.Connection = con;
+                MessageBox.Show("반납할 책을 선택해주세요.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
-                con.Open();
-                cmd.CommandText = "UPDATE IRBook SET book_return_date = '" + txtReturnDate.Text +
-                    "' WHERE std_enroll = '" + txtSearch.Text + "' AND id = " + rowid + "";
-                cmd.ExecuteNonQuery();
-                con.Close();
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(Main.sourceDB))
+                {
+                    con.Open();
+
+                    // IRBook 테이블 업데이트
+                    string updateIRBookQuery = "UPDATE IRBook SET book_return_date = @return_date " +
+                                               "WHERE std_enroll = @std_enroll AND id = @row_id";
+
+                    using (MySqlCommand updateIRBookCommand = new MySqlCommand(updateIRBookQuery, con))
+                    {
+                        updateIRBookCommand.Parameters.AddWithValue("@return_date", txtReturnDate.Text);
+                        updateIRBookCommand.Parameters.AddWithValue("@std_enroll", txtSearch.Text);
+                        updateIRBookCommand.Parameters.AddWithValue("@row_id", rowid);
+                        updateIRBookCommand.ExecuteNonQuery();
+                    }
+
+                    // NewBook 테이블 업데이트
+                    string updateNewBookQuery = "UPDATE NewBook SET bQty = (bQty - 1) WHERE bName = @book_name";
+
+                    using (MySqlCommand updateNewBookCommand = new MySqlCommand(updateNewBookQuery, con))
+                    {
+                        updateNewBookCommand.Parameters.AddWithValue("@book_name", bname);
+                        updateNewBookCommand.ExecuteNonQuery();
+                    }
+                }
 
                 MessageBox.Show("책이 반납되었습니다.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 ReturnBooks_Load(sender, e);
                 txtBookName.Clear();
                 txtIssueDate.Clear();
-                txtSearch.Clear();
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("반납할 책을 선택해주세요.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("오류가 발생했습니다: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
 
         private void btnCancel_Click(object sender, EventArgs e)
         {

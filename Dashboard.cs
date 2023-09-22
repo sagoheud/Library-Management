@@ -1,5 +1,6 @@
 ﻿using Library_Management.Add;
 using Library_Management.View;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,7 +17,7 @@ namespace Library_Management
 {
     public partial class Dashboard : Form
     {
-        string portName = "COM6";
+        string portName = Main.portName;
         // Arduino와의 시리얼 통신에 사용할 포트 이름
         SerialPort serialPort;
         // 시리얼 포트 객체 선언
@@ -97,12 +98,34 @@ namespace Library_Management
             if (receivedData != null)
             {
                 Main.cardNum = receivedData;
-                MessageBox.Show(Main.cardNum);
-                serialPort.Close();
-                IssueBooks ib = new IssueBooks();
-                ib.Show();
+
+                MySqlConnection con = new MySqlConnection();
+                con.ConnectionString = Main.sourceDB;
+                MySqlCommand cmd = new MySqlCommand();
+                cmd.Connection = con;
+                cmd.CommandText = "SELECT * FROM NewStudent WHERE stuEnroll = '" + Main.cardNum + "'";
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+
+                if (dt.Rows.Count > 0)
+                {
+                    serialPort.Close();
+                    IssueBooks ib = new IssueBooks();
+                    ib.Show();
+                }
+                else 
+                {
+                    serialPort.Close();
+                    MessageBox.Show("등록되지 않은 카드 입니다.");
+                    return;
+                }  
             }
-            else { return; }
+            else 
+            {
+                serialPort.Close();
+                return; 
+            }
         }
 
         private void btnBookReturn_Click(object sender, EventArgs e)
@@ -115,15 +138,41 @@ namespace Library_Management
             if (receivedData != null)
             {
                 Main.cardNum = receivedData;
-                MessageBox.Show(Main.cardNum);
-                serialPort.Close();
-                ReturnBooks rb = new ReturnBooks();
-                rb.Show();
+
+                MySqlConnection con = new MySqlConnection();
+                con.ConnectionString = Main.sourceDB;
+                MySqlCommand cmd = new MySqlCommand();
+                cmd.Connection = con;
+                cmd.CommandText = "SELECT * FROM IRBook WHERE std_enroll = '" + Main.cardNum + "' AND book_return_date IS NULL";
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+
+                if (dt.Rows.Count > 0)
+                {
+                    serialPort.Close();
+                    ReturnBooks rb = new ReturnBooks();
+                    rb.Show();
+                }
+                else
+                {
+                    serialPort.Close();
+                    MessageBox.Show("반납할 도서가 없습니다.");
+                    return;
+                }
+
+
             }
             else { return; }
         }
 
-        private void btnBookDetail_Click(object sender, EventArgs e)
+        private void btnTest_Click(object sender, EventArgs e)
+        {
+            Seat s = new Seat();
+            s.Show();
+        }
+
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
             CompleteBooksDetails cbd = new CompleteBooksDetails();
             cbd.Show();
