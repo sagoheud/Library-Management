@@ -30,3 +30,8 @@
 # 실사2
 ![KakaoTalk_20230923_101957613_01](https://github.com/sagoheud/Library-Management/assets/135096712/e7daf7aa-44b4-42d0-966f-80d9067cd338)
 
+
+
+
+
+#BY 구형진(C# DB구축 및 UI), 최유성(C# 테스트 열람실 구현, UI 및 Arduino 융합)
